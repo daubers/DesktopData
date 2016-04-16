@@ -10,8 +10,8 @@
 
 class AccountData{
 public:
-    static int AUTH_OAUTH    = 1;
-    static int AUTH_PASSWORD = 2;
+    const static int AUTH_OAUTH    = 1;
+    const static int AUTH_PASSWORD = 2;
 
     AccountData(std::string username, std::string password);
     AccountData(std::string oauth_token);
