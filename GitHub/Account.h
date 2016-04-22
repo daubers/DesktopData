@@ -31,6 +31,16 @@ public:
     std::string getUsername();
     std::string getCreatedAt();
     std::string getAvatarUrl();
+    std::string getGithubLink();
+    std::string getReposUri();
+    std::string getName();
+    std::string getCompany();
+    std::string getEmail();
+    int getNoPublicRepos();
+    int getNoPrivateRepos();
+    int getNoPublicGists();
+    int getNoFollowers();
+    int getNoFollowing();
     int getId();
 
 private:
@@ -38,6 +48,19 @@ private:
     std::string account_username;
     std::string account_password;
     std::string account_oauth_token;
+    std::string avatar_url;
+    std::string html_url;
+    std::string repos_url;
+    std::string name;
+    std::string company;
+    std::string email;
+    int public_repos;
+    int public_gists;
+    int followers;
+    int following;
+    int total_private_repos;
+    std::string created_at;
+    std::string updated_at;
     int github_id;
 
 };

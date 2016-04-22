@@ -39,11 +39,41 @@ void AccountData::loadData() {
         QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply);
         QJsonObject jsonObj = jsonResponse.object();
         std::cout << "Success login is " << jsonObj["login"].toString().toStdString();
+
         delete reply;
     }
     else {
         //failure
-        std::cout << "Failure" << reply->errorString().toStdString();
+        std::cout << "Failure " << reply->errorString().toStdString();
         delete reply;
     }
 }
+
+int AccountData::authType() { return auth_type; }
+
+int AccountData::getId() { return github_id; }
+
+int AccountData::getNoPrivateRepos() { return total_private_repos; }
+
+int AccountData::getNoPublicRepos() { return public_repos; }
+
+int AccountData::getNoPublicGists() { return public_gists; }
+
+int AccountData::getNoFollowers() { return followers; }
+
+int AccountData::getNoFollowing() { return following; }
+
+std::string AccountData::getAvatarUrl() { return avatar_url; }
+
+std::string AccountData::getCompany() { return company; }
+
+std::string AccountData::getCreatedAt() { return created_at; }
+
+std::string AccountData::getEmail() { return email; }
+
+std::string AccountData::getGithubLink() { return html_url; }
+
+std::string AccountData::getName() { return name; }
+
+std::string AccountData::getReposUri() { return repos_url; }
+
