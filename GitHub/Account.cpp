@@ -35,7 +35,10 @@ void AccountData::loadData() {
     eventLoop.exec();
     if (reply->error() == QNetworkReply::NoError) {
         //success
-        std::cout << "Success" <<reply->readAll().toStdString();
+        QByteArray strReply = reply->readAll();
+        QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply);
+        QJsonObject jsonObj = jsonResponse.object();
+        std::cout << "Success login is " << jsonObj["login"].toString().toStdString();
         delete reply;
     }
     else {

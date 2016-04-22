@@ -13,6 +13,10 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QVariantMap>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 
 class AccountData{
