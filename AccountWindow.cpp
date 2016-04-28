@@ -3,21 +3,20 @@
 //
 
 #include "AccountWindow.h"
-#include <QPushButton>
-#include <QString>
-
 
 AccountWindow::AccountWindow(QWidget *parent) :
         QWidget(parent)
 {
     // Create and position the button
     layout = new QGridLayout;
+    options = new QComboBox();
     api_key = new QLineEdit();
-    m_button = new QPushButton("Hello World");
-    m_button->setGeometry(10, 10, 80, 30);
-    layout->addWidget(api_key, 0 ,0);
-    layout->addWidget(m_button, 0, 1);
+    options->addItem("Account Information");
+    options->addItem("Repo Statistics");
+    layout->addWidget(options, 0 ,0);
     this->setLayout(layout);
+    //connect the option box changing signal up to the right function
+    connect(options, SIGNAL (currentTextChanged(const QString)), this, SLOT (on_combobox_change(const QString)));
 }
 
 void AccountWindow::setApiKey(std::string apikey) {
@@ -25,4 +24,8 @@ void AccountWindow::setApiKey(std::string apikey) {
     this->api_key->setText(QString().fromStdString(apikey));
     acctData = new AccountData(this->api_key->text().toStdString());
     acctData->loadData();
+}
+
+void AccountWindow::on_combobox_change(const QString &text) {
+    qDebug() << text;
 }
