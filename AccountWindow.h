@@ -9,6 +9,8 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QComboBox>
+#include <QGroupBox>
+#include <QLabel>
 #include "GitHub/Account.h"
 
 class QPushButton;
@@ -24,6 +26,12 @@ private:
     QComboBox *options;
     std::string apikey;
     AccountData *acctData;
+    QGroupBox *dataBox;
+    QGridLayout *accountDataLayout;
+    QLabel *lblUsername;
+    QLabel *username;
+    QLabel *lblRealName;
+    QLabel *realName;
 
 private slots:
     void on_combobox_change(const QString &text);

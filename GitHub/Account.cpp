@@ -39,7 +39,9 @@ void AccountData::loadData() {
         QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply);
         QJsonObject jsonObj = jsonResponse.object();
         std::cout << "Success login is " << jsonObj["login"].toString().toStdString();
-
+        std::cout << strReply.toStdString();
+        account_username = jsonObj["login"].toString().toStdString();
+        name = jsonObj["name"].toString().toStdString();
         delete reply;
     }
     else {
@@ -77,3 +79,4 @@ std::string AccountData::getName() { return name; }
 
 std::string AccountData::getReposUri() { return repos_url; }
 
+std::string AccountData::getUsername() { return account_username; }
