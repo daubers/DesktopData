@@ -21,6 +21,7 @@ public:
     explicit AccountWindow(QWidget *parent = 0);
     void setApiKey(std::string apikey);
 private:
+    void setAvatar();
     QLineEdit *api_key;
     QGridLayout *layout;
     QComboBox *options;
@@ -32,9 +33,15 @@ private:
     QLabel *username;
     QLabel *lblRealName;
     QLabel *realName;
+    QLabel *lblCompany;
+    QLabel *company;
+    QLabel *lblPublicRepos;
+    QLabel *publicRepos;
+    QLabel *avatar;
 
 private slots:
     void on_combobox_change(const QString &text);
+    void on_nm_label_download(QNetworkReply *reply);
 };
 
 

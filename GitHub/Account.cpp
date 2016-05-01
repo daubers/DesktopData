@@ -42,6 +42,9 @@ void AccountData::loadData() {
         std::cout << strReply.toStdString();
         account_username = jsonObj["login"].toString().toStdString();
         name = jsonObj["name"].toString().toStdString();
+        company = jsonObj["company"].toString().toStdString();
+        public_repos = jsonObj["public_repos"].toInt();
+        avatar_url = jsonObj["avatar_url"].toString().toStdString();
         delete reply;
     }
     else {
