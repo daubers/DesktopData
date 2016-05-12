@@ -76,6 +76,8 @@ void AccountWindow::setAvatar() {
 }
 
 void AccountWindow::on_combobox_change(const QString &text) {
+    Repositories test_repos = Repositories(acctData);
+    test_repos.loadData();
     qDebug() << text;
 }
 

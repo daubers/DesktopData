@@ -12,6 +12,7 @@
 #include <QGroupBox>
 #include <QLabel>
 #include "GitHub/Account.h"
+#include "GitHub/Repositories.h"
 
 class QPushButton;
 class AccountWindow : public QWidget

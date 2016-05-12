@@ -32,11 +32,11 @@ private:
 class Repositories{
 public:
     Repositories(AccountData *account);
+    void loadData();
 
 private:
     AccountData *account;
     QLinkedList<Repository *> repos;
-    void loadData();
 };
 
 
