@@ -15,21 +15,31 @@ AccountData::AccountData(std::string oauth_token) {
     account_oauth_token = oauth_token;
 }
 
+std::string AccountData::addAuthToURL(std::string url){
+    QString request_url;
+    if (auth_type == AccountData::AUTH_OAUTH) {
+        request_url = QString().fromStdString(url);
+        request_url = request_url.append("?access_token=");
+        request_url = request_url.append(QString().fromStdString(account_oauth_token));
+    }
+    else {
+        QString tmp_url = QString().fromStdString(url).remove("https://");
+        request_url = QString("https://").append(QString().fromStdString(account_username));
+        request_url = request_url.append(QString(":"));
+        request_url = request_url.append(QString().fromStdString(account_password));
+        request_url = request_url.append("@");
+        request_url = request_url.append(tmp_url);
+    }
+    return request_url.toStdString();
+}
+
 void AccountData::loadData() {
     QEventLoop eventLoop;
 
     QNetworkAccessManager mgr;
     QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-    QString request_url;
-    if (auth_type == AccountData::AUTH_OAUTH) {
-        request_url = QString("https://api.github.com/user?access_token=").append(QString().fromStdString(account_oauth_token));
-    }
-    else {
-        request_url = QString("https://").append(QString().fromStdString(account_username));
-        request_url = request_url.append(QString(":"));
-        request_url = request_url.append(QString().fromStdString(account_password));
-        request_url = request_url.append(QString("@api.github.com/user"));
-    }
+    std::string url = addAuthToURL("https://api.github.com/user");
+    QString request_url = QString().fromStdString(url);
     QNetworkRequest req( QUrl( QString().fromStdString(request_url.toStdString()) ) );
     QNetworkReply *reply = mgr.get(req);
     eventLoop.exec();
@@ -40,11 +50,15 @@ void AccountData::loadData() {
         QJsonObject jsonObj = jsonResponse.object();
         std::cout << "Success login is " << jsonObj["login"].toString().toStdString();
         std::cout << strReply.toStdString();
+        std::cout << "\n";
         account_username = jsonObj["login"].toString().toStdString();
         name = jsonObj["name"].toString().toStdString();
         company = jsonObj["company"].toString().toStdString();
         public_repos = jsonObj["public_repos"].toInt();
         avatar_url = jsonObj["avatar_url"].toString().toStdString();
+        repos_url = addAuthToURL(jsonObj["repos_url"].toString().toStdString());
+        std::cout << repos_url;
+
         delete reply;
     }
     else {

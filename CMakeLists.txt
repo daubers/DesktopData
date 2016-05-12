@@ -14,6 +14,6 @@ find_package(Qt5Network REQUIRED)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp GitHub/Projects.cpp GitHub/Projects.h GitHub/Account.cpp GitHub/Account.h LoginWindow.cpp LoginWindow.h AccountWindow.cpp AccountWindow.h)
+set(SOURCE_FILES main.cpp GitHub/Projects.cpp GitHub/Projects.h GitHub/Account.cpp GitHub/Account.h LoginWindow.cpp LoginWindow.h AccountWindow.cpp AccountWindow.h GitHub/Repositories.h GitHub/Repositories.cpp)
 add_executable(GithubData ${SOURCE_FILES})
 qt5_use_modules(GithubData Widgets Network)
