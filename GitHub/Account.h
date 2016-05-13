@@ -42,6 +42,7 @@ public:
     int getNoFollowers();
     int getNoFollowing();
     int getId();
+    std::string addAuthToURL(std::string url);
 
 private:
     int auth_type;
@@ -62,6 +63,6 @@ private:
     std::string created_at;
     std::string updated_at;
     int github_id;
-    std::string addAuthToURL(std::string url);
+
 };
 #endif //GITHUBDATA_ACCOUNT_H

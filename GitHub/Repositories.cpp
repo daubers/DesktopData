@@ -4,8 +4,24 @@
 
 #include "Repositories.h"
 
-Repository::Repository(std::string name) {
-    this->name = name;
+Repository::Repository(AccountData *account) {
+    this->account = account;
+}
+
+void Repository::loadFromObject(QJsonObject data) {
+    id = data["id"].toInt();
+    name = data["name"].toString().toStdString();
+    _private = data["privare"].toBool();
+    _fork = data["fork"].toBool();
+    home_url = data["url"].toString().toStdString();
+    commits_url = account->addAuthToURL(data["commits_url"].toString().toStdString());
+    branches_url = account->addAuthToURL(data["branches_url"].toString().toStdString());
+    description = data["description"].toString().toStdString();
+    language = data["language"].toString().toStdString();
+}
+
+std::string Repository::getName() {
+    return name;
 }
 
 Repositories::Repositories(AccountData *account) {
@@ -27,8 +43,10 @@ void Repositories::loadData() {
         qDebug() << jsonArray.count();
         delete reply;
         foreach (const QJsonValue & value, jsonArray) {
-            QJsonObject repo = value.toObject();
-            qDebug() << repo["name"].toString();
+                QJsonObject repo = value.toObject();
+                Repository *tmpRepo = new Repository(account);
+                tmpRepo->loadFromObject(repo);
+                repos.append(tmpRepo);
         }
     }
     else {
@@ -36,4 +54,7 @@ void Repositories::loadData() {
         std::cout << "Failure " << reply->errorString().toStdString();
         delete reply;
     }
+
+    foreach(Repository *r, repos) qDebug() << QString().fromStdString(r->getName());
+
 }

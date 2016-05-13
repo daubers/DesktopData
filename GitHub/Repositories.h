@@ -21,11 +21,20 @@
 
 class Repository{
 public:
-    Repository(std::string name);
-
+    Repository(AccountData *account);
+    void loadFromObject(QJsonObject data);
+    std::string getName();
 private:
+    AccountData *account;
     std::string name;
-
+    long id;
+    bool _private;
+    bool _fork;
+    std::string home_url;
+    std::string commits_url;
+    std::string branches_url;
+    std::string description;
+    std::string language;
 };
 
 
